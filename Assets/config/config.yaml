@@ -1,0 +1,88 @@
+default_settings:
+  trainer_type: ppo
+  max_steps: 1000000
+  time_horizon: 32 #32 - 2048 steps. 64 def
+  summary_freq: 500
+  self_play:
+    save_steps: 200
+    team_change: 1000
+    swap_steps: 100
+  hyperparameters:
+    batch_size: 16 #32-512, was 128, smaller then buffer size x times
+    buffer_size: 120 #2048 - 409600, was 100, def 10240
+    learning_rate: 3.0e-4 #def 3e-4
+    learning_rate_schedule: linear # constant linear moves rate into 0 for the last step
+    beta: 5.0e-3 # 5.0e-3, was -4, 1e-4 - 1e-2 makes the policy "more random."
+    beta_schedule: constant
+    epsilon: 0.2 # 0.1 - 0.3, 0.2
+    epsilon_schedule: linear # should be the same as for learning rate
+    lambd: 0.9 #0.9 - 0.95, in example it was .99
+    num_epoch: 3 #3-10 direct dependency of batch size
+  network_settings:
+    normalize: false
+    hidden_units: 256 # 32 - 512 
+    num_layers: 3 # 1-3, 2
+  reward_signals:
+    extrinsic:
+      gamma: 0.99 # 0.8 - 0.995 Discount for future rewards
+      strength: 1.0
+
+behaviors:
+  walker:
+    trainer_type: ppo
+    max_steps: 100000
+    time_horizon: 64 #32 - 2048 steps. 64 def
+    summary_freq: 1000
+    
+    hyperparameters:
+      batch_size: 128 #32-512, was 128, smaller then buffer size x times
+      buffer_size: 10240 #2048 - 409600, was 100, def 10240
+      
+      learning_rate: 3.0e-4 #def 3e-4
+      learning_rate_schedule: linear # constant linear moves rate into 0 for the last step
+      
+      beta: 5.0e-3 # 5.0e-3, was -4, 1e-4 - 1e-2 makes the policy "more random."
+      beta_schedule: constant
+      
+      epsilon: 0.2 # 0.1 - 0.3, 0.2
+      epsilon_schedule: linear # should be the same as for learning rate
+      
+      lambd: 0.9 #0.9 - 0.95, in example it was .99
+      
+      num_epoch: 3 #3-10 direct dependency of batch size
+    network_settings:
+      normalize: false
+      hidden_units: 256 # 32 - 512 
+      num_layers: 3 # 1-3, 2
+    #      memory:
+    #        memory_size: 128 # 32 - 256 / 128
+    #        sequence_length: 64 #  4 - 128 / 64
+    reward_signals:
+      extrinsic:
+        gamma: 0.99 # 0.8 - 0.995 Discount for future rewards
+        strength: 1.0
+        
+  xo:
+    trainer_type: ppo
+    max_steps: 1000000
+    summary_freq: 1000
+    hyperparameters:
+      batch_size: 16 
+      buffer_size: 120 
+    network_settings:
+      normalize: false
+      hidden_units: 256 
+      num_layers: 2
+        
+  xo2:
+    trainer_type: ppo
+    max_steps: 1000000
+    summary_freq: 1000
+    hyperparameters:
+      batch_size: 16
+      buffer_size: 120
+    network_settings:
+      normalize: true
+      hidden_units: 256
+      num_layers: 3
+      

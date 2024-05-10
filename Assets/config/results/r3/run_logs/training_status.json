@@ -1,0 +1,30 @@
+{
+    "xo": {
+        "elo": 1386.6613749935793,
+        "checkpoints": [
+            {
+                "steps": 28856,
+                "file_path": "results/r3/xo/xo-28856.onnx",
+                "reward": 0.9753967970609665,
+                "creation_time": 1714683421.8724248,
+                "auxillary_file_paths": [
+                    "results/r3/xo/xo-28856.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 28856,
+            "file_path": "results/r3/xo.onnx",
+            "reward": 0.9753967970609665,
+            "creation_time": 1714683421.8724248,
+            "auxillary_file_paths": [
+                "results/r3/xo/xo-28856.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.30.0",
+        "torch_version": "1.11.0"
+    }
+}
